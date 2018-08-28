@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){ //Aqui quando um botão for clicado faça:
+		var id = $(this).attr('id'); //Crie uma variavel id, que recebera o id do botão clicado.		
+        $.ajax({url: "processar4.php?id="+id, success: function(result){ //Aqui fazemos uma requisição usando ajax, para nosso arquivo php chamado processar.php.
+			//que fara toda a parte logica, retornando algo, que estara no result
+            $("#div1").html(result);//Aqui incluimos o que veio do processamento de nosso arquivo.php para a nossa div1. 
+        }});
+    });
+});
+</script>
+</head>
+<body>
+
+
+<!-- Criamos os botões com ids diferentes -->
+
+<button id="0">Cadastrar</button>
+
+<button id="1">Excluir</button>
+
+<button id="2">Editar</button>
+
+<button id="3">Pesquisar</button>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div> <!-- Esta div irá servira apenas  para receber a resposta do processar.php -->
+
+</body>
+</html>

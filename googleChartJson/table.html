@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Exemplo de gráfico</title>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <script type="text/javascript">
+             google.load('visualization', '1.0', {'packages': ['corechart']});
+              google.charts.load('current', {'packages':['table']});
+             
+            google.setOnLoadCallback(function () {
+                var json_text = $.ajax({url: "getDadosGraficoTable.php", dataType: "json", async: false}).responseText;
+                window.alert(json_text);
+                var json = eval("(" + json_text + ")");
+                var dados = new google.visualization.DataTable(json.dados);
+
+                var chart = new google.visualization.Table(document.getElementById('area_grafico'));
+                chart.draw(dados, json.config);
+            });
+        </script>
+    </head>
+
+    <body>
+        <!-- https://developers.google.com/chart/interactive/docs/gallery/table -->
+        <div id="area_grafico"></div>
+    </body>
+</html>
